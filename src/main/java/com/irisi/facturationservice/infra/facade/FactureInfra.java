@@ -11,11 +11,13 @@ public interface FactureInfra extends AbstractInfra {
 
     int deleteByReference(String reference);
 
-    public int save(FactureEntity facture);
+    public FactureEntity save(FactureEntity facture);
 
-    public int update(FactureEntity factureEntity);
+    public FactureEntity save(FacturePojo facturePojo);
 
-    public int update(FacturePojo facturePojo);
+    public FactureEntity update(FactureEntity factureEntity);
+
+    public FactureEntity update(FacturePojo facturePojo);
 
     public List<FactureEntity> findAll();
 }

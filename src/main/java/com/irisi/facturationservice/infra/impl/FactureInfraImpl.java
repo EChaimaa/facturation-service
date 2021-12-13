@@ -20,10 +20,11 @@ public class FactureInfraImpl extends AbstractInfraImpl implements FactureInfra 
     @Override
     public FacturePojo findByReference(String reference) {
         FactureEntity factureEntity = facDao.findByReference(reference);
-        FacturePojo facturePojo= new FacturePojo();
-        if(factureEntity!=null){
-            BeanUtils.copyProperties(factureEntity,facturePojo);
+        if (factureEntity == null) {
+            return null;
         }
+        FacturePojo facturePojo = new FacturePojo();
+        BeanUtils.copyProperties(factureEntity, facturePojo);
         return facturePojo;
     }
 
@@ -33,25 +34,31 @@ public class FactureInfraImpl extends AbstractInfraImpl implements FactureInfra 
     }
 
     @Override
-    public int save(FactureEntity facture) {
-        if (findByReference(facture.getReference()) != null)
-            return -1;
-        facDao.save(facture);
-        return 1;
+    public FactureEntity save(FactureEntity factureEntity) {
+        if (findByReference(factureEntity.getReference()) != null)
+            return null;
+        return facDao.save(factureEntity);
     }
 
     @Override
-    public int update(FactureEntity factureEntity) {
-        if (findByReference(factureEntity.getReference()) == null)
-            return -1;
-        facDao.save(factureEntity);
-        return 1;
-    }
-
-    @Override
-    public int update(FacturePojo facturePojo) {
+    public FactureEntity save(FacturePojo facturePojo) {
         FactureEntity factureEntity = new FactureEntity();
-        BeanUtils.copyProperties(facturePojo,factureEntity);
+        BeanUtils.copyProperties(facturePojo, factureEntity);
+        return save(factureEntity);
+    }
+
+
+    @Override
+    public FactureEntity update(FactureEntity factureEntity) {
+        if (findByReference(factureEntity.getReference()) == null)
+            return null;
+        return facDao.save(factureEntity);
+    }
+
+    @Override
+    public FactureEntity update(FacturePojo facturePojo) {
+        FactureEntity factureEntity = new FactureEntity();
+        BeanUtils.copyProperties(facturePojo, factureEntity);
         return update(factureEntity);
     }
 
