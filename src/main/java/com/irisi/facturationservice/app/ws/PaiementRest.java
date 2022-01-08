@@ -4,11 +4,12 @@ import com.irisi.facturationservice.infra.facade.PaiementInfra;
 import com.irisi.facturationservice.infra.entity.PaiementEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 //@Api("Gestion de paiement")
 @RestController
-@RequestMapping("/api/v1/paiement")
+@RequestMapping("/api/v1/facturation/paiements")
 public class PaiementRest {
     @Autowired
     PaiementInfra paiementInfra;

@@ -7,9 +7,11 @@
 -- Version du serveur :  10.4.14-MariaDB
 -- Version de PHP : 7.4.11
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET
+SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "+00:00";
+SET
+time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -27,14 +29,15 @@ SET time_zone = "+00:00";
 -- Structure de la table `facture_entity`
 --
 
-CREATE TABLE `facture_entity` (
-  `id` bigint(20) NOT NULL,
-  `client_ref` varchar(255) DEFAULT NULL,
-  `date_facture` datetime DEFAULT NULL,
-  `project_ref` varchar(255) DEFAULT NULL,
-  `reference` varchar(255) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
-  `total` double NOT NULL
+CREATE TABLE `facture_entity`
+(
+    `id`           bigint(20) NOT NULL,
+    `client_ref`   varchar(255) DEFAULT NULL,
+    `date_facture` datetime     DEFAULT NULL,
+    `project_ref`  varchar(255) DEFAULT NULL,
+    `reference`    varchar(255) DEFAULT NULL,
+    `status`       varchar(255) DEFAULT NULL,
+    `total`        double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -43,8 +46,9 @@ CREATE TABLE `facture_entity` (
 -- Structure de la table `hibernate_sequence`
 --
 
-CREATE TABLE `hibernate_sequence` (
-  `next_val` bigint(20) DEFAULT NULL
+CREATE TABLE `hibernate_sequence`
+(
+    `next_val` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -53,11 +57,12 @@ CREATE TABLE `hibernate_sequence` (
 -- Structure de la table `paiement_entity`
 --
 
-CREATE TABLE `paiement_entity` (
-  `id` bigint(20) NOT NULL,
-  `montant` double NOT NULL,
-  `reference` varchar(255) DEFAULT NULL,
-  `facture_id` bigint(20) DEFAULT NULL
+CREATE TABLE `paiement_entity`
+(
+    `id`         bigint(20) NOT NULL,
+    `montant`    double NOT NULL,
+    `reference`  varchar(255) DEFAULT NULL,
+    `facture_id` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -68,13 +73,13 @@ CREATE TABLE `paiement_entity` (
 -- Index pour la table `facture_entity`
 --
 ALTER TABLE `facture_entity`
-  ADD PRIMARY KEY (`id`);
+    ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `paiement_entity`
 --
 ALTER TABLE `paiement_entity`
-  ADD PRIMARY KEY (`id`),
+    ADD PRIMARY KEY (`id`),
   ADD KEY `FKb34srltavix4es256ghllo1ev` (`facture_id`);
 
 --
@@ -85,7 +90,7 @@ ALTER TABLE `paiement_entity`
 -- Contraintes pour la table `paiement_entity`
 --
 ALTER TABLE `paiement_entity`
-  ADD CONSTRAINT `FKb34srltavix4es256ghllo1ev` FOREIGN KEY (`facture_id`) REFERENCES `facture_entity` (`id`);
+    ADD CONSTRAINT `FKb34srltavix4es256ghllo1ev` FOREIGN KEY (`facture_id`) REFERENCES `facture_entity` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

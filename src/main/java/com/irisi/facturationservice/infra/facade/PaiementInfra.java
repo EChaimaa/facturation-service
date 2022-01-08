@@ -12,11 +12,13 @@ public interface PaiementInfra extends AbstractInfra {
 
     int deleteByReference(String reference);
 
-    public int save(PaiementEntity paiement);
+    public PaiementEntity save(PaiementEntity paiement);
 
-    public int update(PaiementEntity paiementEntity);
+    public PaiementEntity save(PaiementPojo paiementPojo);
 
-    public int update(PaiementPojo paiementPojo);
+    public PaiementEntity update(PaiementEntity paiementEntity);
+
+    public PaiementEntity update(PaiementPojo paiementPojo);
 
     public List<PaiementEntity> findAll();
 }

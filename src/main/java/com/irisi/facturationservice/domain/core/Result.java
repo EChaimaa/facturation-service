@@ -3,7 +3,7 @@ package com.irisi.facturationservice.domain.core;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Result<T,K> {
+public class Result<T, K> {
     private List<Message> messages;
     private List<Message> errors;
     private List<Message> warnings;
@@ -27,8 +27,8 @@ public class Result<T,K> {
 
     }
 
-    public boolean hasError(){
-       return getErrors().isEmpty();
+    public boolean hasError() {
+        return getErrors().isEmpty();
     }
 
     public void addErrorMessage(String message) {
@@ -60,10 +60,10 @@ public class Result<T,K> {
     }
 
     private void constructTextMessage(Message myMessage) {
-        if(message==null){
-            message ="";
+        if (message == null) {
+            message = "";
         }
-        message+=myMessage.getLabel();
+        message += myMessage.getLabel();
     }
 
     public List<Message> getMessages() {

@@ -12,11 +12,12 @@ import org.springframework.context.annotation.Configuration;
 public class Processinjection {
 
     @Bean
-    public FacturePaiementProcess facturePaiementProcess(FactureInfra factureInfra){
+    public FacturePaiementProcess facturePaiementProcess(FactureInfra factureInfra) {
         return new FacturePaimentProcessImpl(factureInfra);
     }
+
     @Bean
-    public FactureDeleteProcess factureDeleteProcess(FactureInfra factureInfra){
+    public FactureDeleteProcess factureDeleteProcess(FactureInfra factureInfra) {
         return new FactureDeleteProcessImpl(factureInfra);
     }
 }

@@ -7,9 +7,11 @@
 -- Version du serveur :  10.4.14-MariaDB
 -- Version de PHP : 7.4.11
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET
+SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "+00:00";
+SET
+time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -25,8 +27,8 @@ SET time_zone = "+00:00";
 -- Déchargement des données de la table `hibernate_sequence`
 --
 
-INSERT INTO `hibernate_sequence` (`next_val`) VALUES
-(1);
+INSERT INTO `hibernate_sequence` (`next_val`)
+VALUES (1);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

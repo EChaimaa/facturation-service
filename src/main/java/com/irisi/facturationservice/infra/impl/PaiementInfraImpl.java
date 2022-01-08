@@ -9,7 +9,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -19,32 +18,47 @@ public class PaiementInfraImpl extends AbstractInfraImpl implements PaiementInfr
 
     @Override
     public PaiementPojo findByReference(String reference) {
-        return null;
+        PaiementEntity paiementEntity = paiementDao.findByReference(reference);
+        if(paiementEntity == null){
+            return null;
+        }
+        PaiementPojo paiementPojo = new PaiementPojo();
+        BeanUtils.copyProperties(paiementEntity, paiementPojo);
+        return paiementPojo;
     }
 
     @Override
     public int deleteByReference(String reference) {
-        return 0;
+        return paiementDao.deleteByReference(reference);
     }
 
     @Override
-    public int save(PaiementEntity paiement) {
-        paiementDao.save(paiement);
-        return 1;
+    public PaiementEntity save(PaiementEntity paiementEntity) {
+        if(findByReference(paiementEntity.getReference()) != null){
+            return null;
+        }
+        return paiementDao.save(paiementEntity);
     }
 
     @Override
-    public int update(PaiementEntity paiementEntity) {
-        if (findByReference(paiementEntity.getReference()) == null)
-            return -1;
-        paiementDao.save(paiementEntity);
-        return 1;
-    }
-
-    @Override
-    public int update(PaiementPojo paiementPojo) {
+    public PaiementEntity save(PaiementPojo paiementPojo) {
         PaiementEntity paiementEntity = new PaiementEntity();
-        BeanUtils.copyProperties(paiementPojo,paiementEntity);
+        BeanUtils.copyProperties(paiementPojo, paiementEntity);
+        return save(paiementEntity);
+    }
+
+    @Override
+    public PaiementEntity update(PaiementEntity paiementEntity) {
+        if(findByReference(paiementEntity.getReference()) == null){
+            return null;
+        }
+        return paiementDao.save(paiementEntity);
+    }
+
+    @Override
+    public PaiementEntity update(PaiementPojo paiementPojo) {
+        PaiementEntity paiementEntity = new PaiementEntity();
+        BeanUtils.copyProperties(paiementPojo, paiementEntity);
         return update(paiementEntity);
     }
 

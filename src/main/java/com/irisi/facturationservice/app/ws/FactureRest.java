@@ -12,8 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @RestController
-@RequestMapping("/api/v1/factures")
+@RequestMapping("/api/v1/facturation/factures")
 //@Api("Cette classe permet de tester les process de la facture : delete et payer")
 public class FactureRest {
     @Autowired
@@ -23,14 +24,14 @@ public class FactureRest {
 
     //@ApiOperation(("Payer une facture"))
     @PutMapping("/payer")
-    public Result payer(@RequestBody FactureDto factureDto){
+    public Result payer(@RequestBody FactureDto factureDto) {
         FacturePaiementInput facturePaiementInput = FactureDto.toFacturePaiementInput(factureDto);
         return facturePaiementProcess.execute(facturePaiementInput);
     }
 
     //@ApiOperation(("Supprimer une facture"))
     @DeleteMapping("/")
-    public Result delete(@RequestBody FactureDto factureDto){
+    public Result delete(@RequestBody FactureDto factureDto) {
         FactureDeleteInput factureDeleteInput = FactureDto.toFactureDeleteInput(factureDto);
         return factureDeleteProcess.execute(factureDeleteInput);
     }

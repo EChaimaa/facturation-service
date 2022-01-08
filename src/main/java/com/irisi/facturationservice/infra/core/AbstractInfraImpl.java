@@ -10,7 +10,7 @@ public class AbstractInfraImpl {
     private LocalMessageReader localMessageReader;
 
     public String getMessage(String code) {
-        String message= localMessageReader.getMessage(code);
+        String message = localMessageReader.getMessage(code);
         return message;
     }
 }

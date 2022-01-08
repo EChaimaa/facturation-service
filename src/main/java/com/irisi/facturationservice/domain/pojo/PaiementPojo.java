@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 public class PaiementPojo {
     private Long id;
-    private FactureEntity facture;
+    private FacturePojo facture;
     private String reference;
     private double montant;
 
@@ -18,11 +18,11 @@ public class PaiementPojo {
         this.id = id;
     }
 
-    public FactureEntity getFacture() {
+    public FacturePojo getFacture() {
         return facture;
     }
 
-    public void setFacture(FactureEntity facture) {
+    public void setFacture(FacturePojo facture) {
         this.facture = facture;
     }
 

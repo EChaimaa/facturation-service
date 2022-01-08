@@ -1,7 +1,6 @@
 package com.irisi.facturationservice.infra.entity;
 
 import lombok.*;
-import lombok.experimental.FieldDefaults;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
@@ -12,8 +11,6 @@ import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-@FieldDefaults(level = AccessLevel.PRIVATE)
 @ToString
 @Entity
 public class FactureEntity {

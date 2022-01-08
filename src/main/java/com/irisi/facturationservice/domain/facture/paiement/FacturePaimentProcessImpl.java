@@ -30,6 +30,7 @@ public class FacturePaimentProcessImpl extends AbstractProcessImpl<FacturePaieme
         String reference = facturePaiementInput.getReference();
         double montant = facturePaiementInput.getMontant();
         FacturePojo commande = factureInfra.findByReference(reference);
+        commande.setStatus("Payée");
         factureInfra.update(commande);
         result.addInfoMessage(factureInfra.getMessage("facture.paiment.created_success"));
     }

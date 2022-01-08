@@ -11,18 +11,19 @@ public class PaiementDeleteProcessImpl extends AbstractProcessImpl<PaiementDelet
     public PaiementDeleteProcessImpl(PaiementInfra paiementInfra) {
         this.paiementInfra = paiementInfra;
     }
+
     @Override
     public void validate(PaiementDeleteInput paiementDeleteInput, Result result) {
-        String reference=paiementDeleteInput.getReference();
+        String reference = paiementDeleteInput.getReference();
         PaiementPojo paiementPojo = paiementInfra.findByReference(reference);
-        if(paiementPojo == null || paiementPojo.getId() == null){
+        if (paiementPojo == null || paiementPojo.getId() == null) {
             result.addErrorMessage(paiementInfra.getMessage("paiement.delete.not_found"));
         }
     }
 
     @Override
     public void run(PaiementDeleteInput paiementDeleteInput, Result result) {
-        String reference=paiementDeleteInput.getReference();
+        String reference = paiementDeleteInput.getReference();
         paiementInfra.deleteByReference(reference);
         result.addInfoMessage(paiementInfra.getMessage("paiement.delete.deleted_success"));
         result.setStatus(1);

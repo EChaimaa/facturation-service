@@ -2,7 +2,7 @@ package com.irisi.facturationservice.domain.facture.delete;
 
 import com.irisi.facturationservice.domain.core.AbstractProcessInput;
 
-public class FactureDeleteInput  extends AbstractProcessInput {
+public class FactureDeleteInput extends AbstractProcessInput {
 
     String reference;
 

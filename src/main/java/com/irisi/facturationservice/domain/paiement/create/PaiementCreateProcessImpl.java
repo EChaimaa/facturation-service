@@ -22,7 +22,7 @@ public class PaiementCreateProcessImpl extends AbstractProcessImpl<PaiementCreat
         PaiementPojo paiement = paiementInfra.findByReference(abstractProcessInput.getPaiement().getReference());
         if (facture == null) {
             result.addErrorMessage("paiement.create.facture_not_founded");
-        }else if(abstractProcessInput.getPaiement().getMontant() != facture.getTotal()){
+        } else if (abstractProcessInput.getPaiement().getMontant() != facture.getTotal()) {
             result.addErrorMessage("paiement.create.montant_invalid");
         }
         if (paiement != null && paiement.getId() != null) {
@@ -32,6 +32,10 @@ public class PaiementCreateProcessImpl extends AbstractProcessImpl<PaiementCreat
 
     @Override
     public void run(PaiementCreateInput abstractProcessInput, Result result) {
-
+        FacturePojo facture = factureInfra.findByReference(abstractProcessInput.getReferenceFacture());
+        PaiementPojo paiement = paiementInfra.findByReference(abstractProcessInput.getPaiement().getReference());
+        paiement.setFacture(facture);
+        paiementInfra.save(paiement);
+        result.addInfoMessage("paiement.create.paiement_created");
     }
 }

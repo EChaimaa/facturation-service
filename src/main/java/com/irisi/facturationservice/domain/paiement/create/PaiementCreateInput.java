@@ -17,7 +17,7 @@ public class PaiementCreateInput extends AbstractProcessInput {
 
     public PaiementPojo getPaiement() {
         if (paiement == null) {
-            paiement= new PaiementPojo();
+            paiement = new PaiementPojo();
         }
         return paiement;
     }

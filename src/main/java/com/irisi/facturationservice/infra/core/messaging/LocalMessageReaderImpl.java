@@ -10,7 +10,7 @@ import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
 @Component
-public class LocalMessageReaderImpl implements  LocalMessageReader {
+public class LocalMessageReaderImpl implements LocalMessageReader {
     @Value("${local.language}")
     private String language;
 
@@ -33,7 +33,7 @@ public class LocalMessageReaderImpl implements  LocalMessageReader {
         return message == null ? code : message;
     }
 
-    private  ResourceBundle createUtf8PropertyResourceBundle(
+    private ResourceBundle createUtf8PropertyResourceBundle(
             final ResourceBundle bundle) {
         if (!(bundle instanceof PropertyResourceBundle)) {
             return bundle;
