@@ -21,7 +21,7 @@ public class FactureDeleteProcessImpl extends AbstractProcessImpl<FactureDeleteI
             result.addErrorMessage(factureInfra.getMessage("facture.delete.not_found"));
         }
         if (facturePojo.getStatus().equalsIgnoreCase("payee")) {
-            result.addErrorMessage(factureInfra.getMessage("facture.delete.prob_itsPayed"));
+                result.addErrorMessage(factureInfra.getMessage("facture.delete.prob_itsPayed"));
         }
     }
 

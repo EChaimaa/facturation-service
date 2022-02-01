@@ -1,8 +1,6 @@
 package com.irisi.facturationservice.domain.pojo;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Date;
 
 public class FacturePojo {
@@ -13,6 +11,15 @@ public class FacturePojo {
     private Date dateFacture;
     private String status;   // payee|nonPayee
     private double total;
+    private byte[] pdf;
+
+    public byte[] getPdf() {
+        return pdf;
+    }
+
+    public void setPdf(byte[] pdf) {
+        this.pdf = pdf;
+    }
 
     public Long getId() {
         return id;
@@ -68,5 +75,19 @@ public class FacturePojo {
 
     public void setTotal(double total) {
         this.total = total;
+    }
+
+    @Override
+    public String toString() {
+        return "FacturePojo{" +
+                "id=" + id +
+                ", reference='" + reference + '\'' +
+                ", clientRef='" + clientRef + '\'' +
+                ", projectRef='" + projectRef + '\'' +
+                ", dateFacture=" + dateFacture +
+                ", status='" + status + '\'' +
+                ", total=" + total +
+                ", pdf=" + Arrays.toString(pdf) +
+                '}';
     }
 }

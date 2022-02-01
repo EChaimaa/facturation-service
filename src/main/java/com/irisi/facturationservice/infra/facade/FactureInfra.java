@@ -1,6 +1,7 @@
 package com.irisi.facturationservice.infra.facade;
 
 import com.irisi.facturationservice.domain.pojo.FacturePojo;
+import com.irisi.facturationservice.domain.pojo.ProjetMemberPojo;
 import com.irisi.facturationservice.infra.core.AbstractInfra;
 import com.irisi.facturationservice.infra.entity.FactureEntity;
 
@@ -13,11 +14,15 @@ public interface FactureInfra extends AbstractInfra {
 
     FactureEntity save(FactureEntity facture);
 
-    FactureEntity save(FacturePojo facturePojo);
+    FacturePojo save(FacturePojo facturePojo);
 
     FactureEntity update(FactureEntity factureEntity);
 
-    FactureEntity update(FacturePojo facturePojo);
+    FacturePojo update(FacturePojo facturePojo);
 
     List<FactureEntity> findAll();
+
+    List<ProjetMemberPojo> findProjetMembers(FacturePojo facturePojo);
+
+    double calculTotalFacture(FacturePojo facturePojo);
 }

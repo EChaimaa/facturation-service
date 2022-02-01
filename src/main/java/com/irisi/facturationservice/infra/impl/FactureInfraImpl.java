@@ -1,23 +1,25 @@
 package com.irisi.facturationservice.infra.impl;
 
 import com.irisi.facturationservice.domain.pojo.FacturePojo;
+import com.irisi.facturationservice.domain.pojo.ProjetMemberPojo;
+import com.irisi.facturationservice.domain.pojo.ProjetPojo;
+import com.irisi.facturationservice.infra.converter.FactureConverter;
 import com.irisi.facturationservice.infra.core.AbstractInfraImpl;
 import com.irisi.facturationservice.infra.facade.FactureInfra;
 import com.irisi.facturationservice.infra.dao.FactureDao;
 import com.irisi.facturationservice.infra.entity.FactureEntity;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
+import com.irisi.facturationservice.infra.proxy.ProjetProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
-import java.util.logging.Logger;
 
 @Service
 public class FactureInfraImpl extends AbstractInfraImpl implements FactureInfra {
     @Autowired
     FactureDao facDao;
+    @Autowired
+    ProjetProxy projetProxy;
 
     @Override
     public FacturePojo findByReference(String reference) {
@@ -25,8 +27,8 @@ public class FactureInfraImpl extends AbstractInfraImpl implements FactureInfra 
         if (factureEntity == null) {
             return null;
         }
-        FacturePojo facturePojo = new FacturePojo();
-        BeanUtils.copyProperties(factureEntity, facturePojo);
+        FactureConverter factureConverter = new FactureConverter();
+        FacturePojo facturePojo = factureConverter.toPojo(factureEntity);
         return facturePojo;
     }
 
@@ -37,16 +39,16 @@ public class FactureInfraImpl extends AbstractInfraImpl implements FactureInfra 
 
     @Override
     public FactureEntity save(FactureEntity factureEntity) {
-        if (findByReference(factureEntity.getReference()) != null)
-            return null;
+        if (findByReference(factureEntity.getReference()) != null) return null;
         return facDao.save(factureEntity);
     }
 
     @Override
-    public FactureEntity save(FacturePojo facturePojo) {
-        FactureEntity factureEntity = new FactureEntity();
-        BeanUtils.copyProperties(facturePojo, factureEntity);
-        return save(factureEntity);
+    public FacturePojo save(FacturePojo facturePojo) {
+        FactureConverter factureConverter = new FactureConverter();
+        FactureEntity factureEntity = factureConverter.toEntity(facturePojo);
+        FacturePojo facture = factureConverter.toPojo(save(factureEntity));
+        return facture;
     }
 
 
@@ -58,14 +60,33 @@ public class FactureInfraImpl extends AbstractInfraImpl implements FactureInfra 
     }
 
     @Override
-    public FactureEntity update(FacturePojo facturePojo) {
-        FactureEntity factureEntity = new FactureEntity();
-        BeanUtils.copyProperties(facturePojo, factureEntity);
-        return update(factureEntity);
+    public FacturePojo update(FacturePojo facturePojo) {
+        FactureConverter factureConverter = new FactureConverter();
+        FactureEntity factureEntity = factureConverter.toEntity(facturePojo);
+        FacturePojo facture = factureConverter.toPojo(update(factureEntity));
+        return facture;
     }
 
     @Override
     public List<FactureEntity> findAll() {
         return facDao.findAll();
+    }
+
+    @Override
+    public List<ProjetMemberPojo> findProjetMembers(FacturePojo facturePojo) {
+        ProjetPojo projetPojo = projetProxy.findByReference(facturePojo.getProjectRef());
+        List<ProjetMemberPojo> projetMembers = projetProxy.findProjetMembersByProject(projetPojo.getReference());
+        return  projetMembers;
+    }
+
+    @Override
+    public double calculTotalFacture(FacturePojo facturePojo) {
+        ProjetPojo projetPojo = projetProxy.findByReference(facturePojo.getProjectRef());
+        List<ProjetMemberPojo> projetMembers = projetProxy.findProjetMembersByProject(projetPojo.getReference());
+        double total = 0;
+        for (ProjetMemberPojo projetMember: projetMembers) {
+            total += projetMember.getEmploye().getCategorie().getSalaireParHeure() * projetMember.getNbrHeures();
+        }
+        return total;
     }
 }

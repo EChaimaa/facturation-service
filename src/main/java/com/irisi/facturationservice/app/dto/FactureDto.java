@@ -1,9 +1,5 @@
 package com.irisi.facturationservice.app.dto;
 
-import com.irisi.facturationservice.domain.facture.delete.FactureDeleteInput;
-import com.irisi.facturationservice.domain.facture.paiement.FacturePaiementInput;
-import org.springframework.beans.BeanUtils;
-
 import java.util.Date;
 
 public class FactureDto {
@@ -14,6 +10,15 @@ public class FactureDto {
     private Date dateFacture;
     private String status;   // payee|nonPayee
     private double total;
+    private byte[] pdf;
+
+    public byte[] getPdf() {
+        return pdf;
+    }
+
+    public void setPdf(byte[] pdf) {
+        this.pdf = pdf;
+    }
 
     public Long getId() {
         return id;
@@ -71,17 +76,4 @@ public class FactureDto {
         this.total = total;
     }
 
-    public static FacturePaiementInput toFacturePaiementInput(FactureDto factureDto) {
-        FacturePaiementInput facturePaiementInput = new FacturePaiementInput();
-        if (factureDto != null)
-            BeanUtils.copyProperties(factureDto, facturePaiementInput);
-        return facturePaiementInput;
-    }
-
-    public static FactureDeleteInput toFactureDeleteInput(FactureDto factureDto) {
-        FactureDeleteInput factureDeleteInput = new FactureDeleteInput();
-        if (factureDto != null)
-            BeanUtils.copyProperties(factureDto, factureDeleteInput);
-        return factureDeleteInput;
-    }
 }
