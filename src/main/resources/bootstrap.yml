@@ -1,0 +1,15 @@
+spring:
+  cloud:
+    config:
+      uri: http://CLOUD-CONFIG-SERVER-SVC
+      label: main
+      profile: default
+      fail-fast: true
+      retry:
+        max-attempts: 30
+        max-interval: 8000
+  application:
+    name: MS-FACTURATION
+server:
+  port: 9002
+

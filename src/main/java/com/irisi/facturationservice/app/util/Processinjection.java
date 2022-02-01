@@ -5,15 +5,14 @@ import com.irisi.facturationservice.domain.facture.create.FactureCreateProcessIm
 import com.irisi.facturationservice.domain.facture.delete.FactureDeleteProcess;
 import com.irisi.facturationservice.domain.facture.delete.FactureDeleteProcessImpl;
 import com.irisi.facturationservice.infra.facade.FactureInfra;
-import com.irisi.facturationservice.infra.impl.MailSender;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class Processinjection {
     @Bean
-    public FactureCreateProcess factureCreateProcess(FactureInfra factureInfra, MailSender mailSender){
-        return new FactureCreateProcessImpl(factureInfra, mailSender);
+    public FactureCreateProcess factureCreateProcess(FactureInfra factureInfra){
+        return new FactureCreateProcessImpl(factureInfra);
     }
 
     @Bean
