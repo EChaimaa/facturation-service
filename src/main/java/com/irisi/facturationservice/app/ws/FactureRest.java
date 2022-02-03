@@ -8,11 +8,13 @@ import com.irisi.facturationservice.domain.facture.create.FactureCreateProcess;
 import com.irisi.facturationservice.domain.facture.delete.FactureDeleteInput;
 import com.irisi.facturationservice.domain.facture.delete.FactureDeleteProcess;
 import com.irisi.facturationservice.domain.pojo.FacturePojo;
+import com.irisi.facturationservice.infra.entity.FactureEntity;
 import com.irisi.facturationservice.infra.facade.FactureInfra;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/facturation/factures")
@@ -31,6 +33,11 @@ public class FactureRest {
         FactureCreateInput factureCreateInput = new FactureCreateInput();
         factureCreateInput.setFacture(facture);
         return factureCreateProcess.execute(factureCreateInput);
+    }
+
+    @GetMapping("/")
+    public List<FactureEntity> findAll(){
+        return factureInfra.findAll();
     }
 
     @Transactional
